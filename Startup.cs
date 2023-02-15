@@ -32,6 +32,8 @@ namespace SklepGamingowy
             services.AddRazorPages();
             services.AddMemoryCache();
             services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
 
