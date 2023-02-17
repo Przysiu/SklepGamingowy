@@ -47,8 +47,18 @@ namespace SklepGamingowy
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseStatusCodePages();
+            if (env.IsProduction())
+            {
+                app.UseExceptionHandler("/error");
+            }
+            else
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
+
+
+
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();

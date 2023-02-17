@@ -34,6 +34,32 @@ namespace SklepGamingowy.Controllers
                 },
                 CurrentCategory = category
             });
+
+        [HttpGet]
+        public ViewResult TournamentForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult TournamentForm(GuestResponse guestResponse)
+        {
+            if (ModelState.IsValid)
+            {
+                Repository.AddResponse(guestResponse);
+                return View("Thanks", guestResponse);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ViewResult ListResponses()
+        {
+            return View(Repository.Responses.Where(r => r.WillAttend == true));
+        }
+
     }
 }
 
